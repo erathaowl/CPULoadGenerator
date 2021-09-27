@@ -1,37 +1,7 @@
 [
   {
     "repeat": 1,
-    "cpu_num": 0,
-    "sequence": [
-      {
-        "load": 0.5,
-        "duration_s": 10
-      },
-      {
-        "load": 1.0,
-        "duration_s": 10
-      },
-      {
-        "load": 0.1,
-        "duration_s": 10
-      },
-      {
-        "load": 1.0,
-        "duration_s": 10
-      },
-      {
-        "load": 0.1,
-        "duration_s": 10
-      },
-      {
-        "load": 1.0,
-        "duration_s": 10
-      }
-    ]
-  },
-  {
-    "repeat": 2,
-    "cpu_num": 1,
+    "target_cpus": [0, 1, 2, 3],
     "sequence": [
       {
         "load": 0.5,

@@ -35,6 +35,9 @@ def input_error_handler(args):
     cpu_count = psutil.cpu_count()
 
     if args.path_to_profile_json == "":
+        if(args.cpu_load == None):
+            raise ValueError('CPU load value must be provided')
+
         if not args.cpu_core < cpu_count:
             args.print_help()
             raise ValueError('Core to load should not be higher than {}!'.format(cpu_count - 1))

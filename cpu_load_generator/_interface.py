@@ -70,9 +70,11 @@ def from_profile(path_to_profile_json):
 
     processes = []
     for single_sequence in profile:
-        process = mp.Process(target=_run_single_sequence,
-                             args=(single_sequence["cpu_num"], single_sequence["repeat"], single_sequence["sequence"]))
-        processes.append(process)
+        targets = single_sequence["target_cpus"]
+        for target in targets:
+            process = mp.Process(target=_run_single_sequence,
+                                args=(target, single_sequence["repeat"], single_sequence["sequence"]))
+            processes.append(process)
 
     for process in processes:
         process.start()
