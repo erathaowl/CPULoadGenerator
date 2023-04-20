@@ -59,10 +59,13 @@ class ClosedLoopActuator:
         process.cpu_affinity([self._cpu_core_num])
         start_time = time.time()
 
-        while (time.time() - start_time) <= self._duration_s:
+        while True:
             self._controller.cpu = self._monitor.current_cpu_load
             sleep_time = self._controller.sleep_time_s
             self._generate_load(sleep_time)
+            if self.duration > 0:
+                if (time.time() - start_time) > self._duration_s:
+                    break
 
     def _generate_load(self, sleep_time):
         """Generate some CPU load during time period."""
