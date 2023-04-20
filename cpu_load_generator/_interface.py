@@ -107,7 +107,10 @@ def _run_single_sequence(core_num, repeat, sequence):
     actuator = ClosedLoopActuator(controller=control, monitor=monitor, duration_s=0.0,
                                   cpu_core_num=core_num, cpu_target=0.0)
 
-    for _ in range(repeat):
+    
+    repeat_count = 0
+    while True:
+    # for _ in range(repeat):
         for single_profile in sequence:
             target_load = single_profile['load']
             duration_s = single_profile['duration_s']
@@ -116,6 +119,11 @@ def _run_single_sequence(core_num, repeat, sequence):
             actuator.duration_s = duration_s
             actuator.cpu_target = target_load
             actuator.run()
+            
+        if repeat > 0:
+            repeat_count += 1
+            if repeat_count > repeat:
+                break
 
     monitor.running.clear()
     control.running.clear()
