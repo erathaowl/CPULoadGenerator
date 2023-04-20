@@ -63,7 +63,7 @@ class ClosedLoopActuator:
             self._controller.cpu = self._monitor.current_cpu_load
             sleep_time = self._controller.sleep_time_s
             self._generate_load(sleep_time)
-            if self.duration > 0:
+            if self._duration_s > 0:
                 if (time.time() - start_time) > self._duration_s:
                     break
 
